@@ -14,5 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/news/count/{count}', 'NewsController@index');
-Route::get('/news/{id}', 'NewsController@show');
+Route::get('/news/count/{count}', 'NewsController@getNews');
+Route::get('/news/{id}', 'NewsController@getNewsById');
+
+

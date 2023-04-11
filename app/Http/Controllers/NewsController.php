@@ -1,28 +1,35 @@
 <?php
 
-namespace App\Http\Controllers;
-
-use App\Models\News;
-use App\Models\Categories;
-use Illuminate\Http\Request; 
+namespace App\Http\Controllers; 
+use App\Services\NewsService;
+use Illuminate\Http\JsonResponse; 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Response;
 
 class NewsController extends Controller
 {
-    public function index($count)
+    private $newsService;
+
+    public function __construct(NewsService $newsService)
     { 
-        
-        $news = News::with(['category' , 'descriptions'])
-        ->limit($count)
-        ->get();
+        $this->newsService = $newsService;
+    } 
+
+    public function getNews($count) : JsonResponse
+    {    
+        $news = $this->newsService->getNews($count);
         
         return response()->json($news);
     }
 
-    public function show($id){
-        $news = News::with(['category' , 'descriptions'])
-        ->findOrFail($id)  ;
-       
+    public function getNewsById($id) : JsonResponse{
+        
+        $news = $this->newsService->getNewsById($id);
+
+        if (!$news) {
+            return response()->json(['error' => 'Resource not found'], 404);
+        }
+
         return response()->json($news);
     }
 
