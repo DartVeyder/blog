@@ -15,8 +15,8 @@ class CreateNewsDescriptionsTable extends Migration
     {
         Schema::create('news_descriptions', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->text('text');
+            $table->string('title');
+            $table->text('content');
             $table->unsignedBigInteger('language_id')->nullable();
             $table->unsignedBigInteger('news_id');
 

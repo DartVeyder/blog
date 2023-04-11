@@ -8,9 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class NewsDescription extends Model
 {
     use HasFactory;
+    protected $table = 'news_descriptions';
+    public $timestamps = false;
+ 
 
-    public function language()
+    public function news()
     {
-        return $this->belongsTo(Language::class, 'language_id' , 'id');
+        return $this->belongsTo(News::class);
     }
+
+   
 }

@@ -17,4 +17,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/news', 'NewsController@index');
+Route::get('/news/count/{count}', 'NewsController@index');
+Route::get('/news/{id}', 'NewsController@show');
